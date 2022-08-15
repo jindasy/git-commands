@@ -19,8 +19,9 @@
 
 [Basics](#basics)    
 [Adding and Changing Things](#adding-and-changing-things)    
-[Next Section (todo: Fix This)](#next-section)    
-[Next Section (todo: Fix This)](#next-next-section)    
+[Undo Changes and Recover Files](#undo-changes-and-recover-files)    
+[Viewing Commits](#viewing-commits)    
+[Branch and Merge](#branch-and-merge)    
 [Commands for Remotes](remote-commands.md)   
 [Favorites](#favorites)     
 [Resources](#resources)
@@ -33,24 +34,33 @@ In this file, directory paths are written with a forward slash as on MacOS, Linu
 ## Basics
 
 1. When using Git locally, what are these?  Define each one in a sentence
-   * Staging area -
-   * Working copy -
-   * master -
-   * HEAD -
+   * Staging area - File that prepares to be committed.
+   * Working copy - All files in working directory
+   * master - 
+   * HEAD - 
 
 2. When you install git on a new machine (or in a new user account) you should perform these 2 git commands to tell git your name and email.  These values are used in commits that you make:
    ```
    # Git configuration commands for a new account
-
-
+   git config --global user.name "Name Surname"
+   git config --global user.email name@gmail.com
    ```
 
 3. There are 2 ways to create a local Git repository.  What are they?
    - todo: briefly describe first way
+   use command                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+   ```
+   git init
+   ```
+   to create new repository in your current directory
    - todo: briefly describe second way
+   use command 
+   ``` git clone ``` to clone repository to your directory
 
 4. When you create a git repository by entering `git init`, Git will create a "hidden" directory for the local repository.  Where is the directory for this local repository (relative to the directory where you typed "git init")?
-
+   ```
+   .git
+   ```
 
 
 ## Adding and Changing Things
@@ -72,37 +82,65 @@ test/
 1. Add README.md and *everything* in the `src` directory to the git staging area.
    ```
    todo  your answer here
+   git add README.md src
    ```
 
 2. Add `test/test_a.py` to the staging area (but not any other files).
    ```
    todo  your answer here
+   git add test/test_a.py
    ```
 
 3. List the files in the staging area.
-
+   ```
+   README.md
+   src/a.py
+   src/b.py
+   src/c.py
+   test/test_a.py
+   ```
 
 4. Remove `README.md` from the staging area. (Useful if you accidentally add something you don't want to commit.)
+   ```
+   git rm --cached README.md
+   ```
 
+6. Commit everything in the staging area to the repository.
+   ```
+   git commit
+   ```
 
-5. Commit everything in the staging area to the repository.
+7. Describe 2 steps to configure the repository so git will ignore all files in the `out/` directory:
+   - step one: create .gitignore file in top-level directory, you can also use this command to create
+   ```
+   touch .gitignore
+   ```
+   - step two: use command to 
+   ```
+   # ignore all files in directory name out
+   out/
+   ```
 
-
-6. Describe 2 steps to configure the repository so git will ignore all files in the `out/` directory:
-   - step one
-   - step two
-
-7. Command to move all the .py files from `src` to the top-level directory of this repository, so they are also moved in the Git repo.
-
+8. Command to move all the .py files from `src` to the top-level directory of this repository, so they are also moved in the Git repo.
+   ```
+   git mv src/*.py .
+   ```
 
 8. Commit this change with the message "moved src directory":
-
+   ```
+   git commit -m "moved src directory"
+   ```
 
 9. Command to add **all changed files** (but not untracked files) to the staging area using a single command.
-
+   ```
+   git add -u
+   ```
 
 10. **Delete** the file `c.py` from your working copy **and** the repository:
-
+   ```
+   git rm c.py
+   git commit -m "deleted c.py"
+   ```
 
 
 ## Undo Changes and Recover Files
@@ -110,28 +148,44 @@ test/
 > TODO: enter the git command to do each of these
 
 1.  Display the differences between your *working copy* of `a.py` and the `a.py` in the *local repository* (HEAD revision):
-
+   ```
+   git diff
+   ```
 2. Display the differences between your *working copy* of `a.py` and the version in the *staging area*. (But, if a.py is not in the staging area this will compare working copy to HEAD revision):
-
+   ```
+   git diff
+   ```
 3. **View changes to be committed:** Display the differences between files in the staging area and the versions in the repository. (You can also specify a file name to compare just one file.) 
-
+   ```
+   git diff --staged
+   ```
 
 4. **Undo "git add":** If `main.py` has been added to the staging area (`git add main.py`), remove it from the staging area:
-
+   ```
+   git rm --cached main.py
+   git restore --staged main.py
+   
+   ```
 
 5. **Recover a file:** Command to replace your working copy of `a.py` with the most recent (HEAD) version in the repository.  This also works if you have deleted your working copy of this file.
-
+   ```
+   git checkout -- a.py
+   ```
 
 6. **Undo a commit:** Suppose you want to discard some commit(s) and move both HEAD and "master" to an earlier revision (an earlier commit)  Suppose the git commit graph looks like this (`aaaa`, etc, are the commit ids)
    ```
    aaaa ---> bbbb ---> cccc ---> dddd [HEAD -> master]
    ``` 
    The command to reset HEAD and master to the commit id `bbbb`:
+   ```
+   git reset --hard bbbb
+   ```
 
 
 7. **Checkout old code:** Using the above example, the command to replace your working copy with the files from commit with id `aaaa`:
    ```
    todo your answer here
+   git checkout aaaa
    ```
     Note:
     - Git won't let you do this if you have uncommitted changes to any "tracked" files.
@@ -147,11 +201,26 @@ test/
    Some versions of git have an *alias* "log1" for this (`git log1`).
 
 2. Show the history (as above) including *all* branches in the repository and include a graph connecting the commits:
-
+   ```
+   d0436fb (HEAD -> master) deleted c.py
+   c21ccb2 moved src directory
+   9131226 first files
+   
+   9131226 ---> c21ccb2 ---> d0436fb [HEAD -> master]
+   
+   ```
 
 3. List all the files in the current branch of the repository:
    ```
    todo your answer
+   .gitignore
+   README.md
+   a.py
+   b.py
+   test/test_a.py
+   test/test_b.py
+   out/a.exe
+   src/
    ```
    example output:
    ```
@@ -168,22 +237,38 @@ test/
 
 > TODO write the commands to do each of these
 1. Create a new branch named `dev-foo`:
+   ```
+   git branch dev-foo
+   ```
  
-2. Display the name of your current branch:
+3. Display the name of your current branch:
+   ```
+   git branch --show-current
+   ```
 
-3. List the names of **all** branches, including remote branches:
+5. List the names of **all** branches, including remote branches:
+   ```
+     dev-foo
+   * master
+   
+   ```
 
-4. Switch your working copy to the branch named `dev-foo`:
+7. Switch your working copy to the branch named `dev-foo`:
+   ```
+   git checkout dev-foo
+   ```
 
-5. **Merge:** To merge the work from `dev-foo` into the master branch, perform these steps:
+9. **Merge:** To merge the work from `dev-foo` into the master branch, perform these steps:
    > TODO: write a description of the steps and the git command(s) for each step
-   1. step one
+   1. step one : switched from branch `dev-foo` to branch `master`
       ```
       git do something
+      git checkout master
       ```
-   2. step two
+   2. step two : merge branch `dev-foo` into branch `master`
       ```
       git do something else
+      git merge dev-foo
       ```
 
 
