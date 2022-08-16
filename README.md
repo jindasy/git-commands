@@ -15,8 +15,6 @@
 
 ## Using Git
 
-> TODO: Create a table of contents here.  Each line should be a clickable link to each part of this document or another file containing the questions and answers. One item per line.
-
 [Basics](#basics)    
 [Adding and Changing Things](#adding-and-changing-things)    
 [Undo Changes and Recover Files](#undo-changes-and-recover-files)    
@@ -34,10 +32,10 @@ In this file, directory paths are written with a forward slash as on MacOS, Linu
 ## Basics
 
 1. When using Git locally, what are these?  Define each one in a sentence
-   * Staging area - File that prepares to be committed.
-   * Working copy - All files in working directory
-   * master - 
-   * HEAD - 
+   * Staging area - File that wait to be committed.
+   * Working copy - All files in working directory of local repository.
+   * master - default branch in repository
+   * HEAD - pointer that tell current branch
 
 2. When you install git on a new machine (or in a new user account) you should perform these 2 git commands to tell git your name and email.  These values are used in commits that you make:
    ```
@@ -47,15 +45,15 @@ In this file, directory paths are written with a forward slash as on MacOS, Linu
    ```
 
 3. There are 2 ways to create a local Git repository.  What are they?
-   - todo: briefly describe first way
-   use command                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-   ```
-   git init
-   ```
-   to create new repository in your current directory
-   - todo: briefly describe second way
-   use command 
-   ``` git clone ``` to clone repository to your directory
+   - create new repository in your current directory by using command
+     ```
+     git init
+     ```
+   
+   - clone or copy remote repository to your directory by using use command
+     ```
+     git clone
+     ```
 
 4. When you create a git repository by entering `git init`, Git will create a "hidden" directory for the local repository.  Where is the directory for this local repository (relative to the directory where you typed "git init")?
    ```
@@ -76,18 +74,15 @@ src/a.py
 test/
     test_a.py
     ...
-```     
-> TODO: Write the git command to perform each of these:
+```
 
 1. Add README.md and *everything* in the `src` directory to the git staging area.
    ```
-   todo  your answer here
    git add README.md src
    ```
 
 2. Add `test/test_a.py` to the staging area (but not any other files).
    ```
-   todo  your answer here
    git add test/test_a.py
    ```
 
@@ -105,23 +100,28 @@ test/
    git rm --cached README.md
    ```
 
-6. Commit everything in the staging area to the repository.
+5. Commit everything in the staging area to the repository.
    ```
    git commit
    ```
 
-7. Describe 2 steps to configure the repository so git will ignore all files in the `out/` directory:
+6. Describe 2 steps to configure the repository so git will ignore all files in the `out/` directory:
    - step one: create .gitignore file in top-level directory, you can also use this command to create
-   ```
-   touch .gitignore
-   ```
-   - step two: use command to 
-   ```
-   # ignore all files in directory name out
-   out/
-   ```
+     ```
+     touch .gitignore
+     ```
+   - step two: tell git to ignore directory by using pattern
+     ```
+     # ignore all files in directory name out
+     out/
+     ```
+     and add `.gitignore` to the repository
+     ```
+     git add .gitignore
+     git commit -m "add .gitignore"
+     ```
 
-8. Command to move all the .py files from `src` to the top-level directory of this repository, so they are also moved in the Git repo.
+7. Command to move all the .py files from `src` to the top-level directory of this repository, so they are also moved in the Git repo.
    ```
    git mv src/*.py .
    ```
@@ -135,19 +135,17 @@ test/
    ```
    git add -u
    ```
-
 10. **Delete** the file `c.py` from your working copy **and** the repository:
-   ```
-   git rm c.py
-   git commit -m "deleted c.py"
-   ```
+    ```
+    git rm c.py
+    git commit -m "deleted c.py"
+    ```
 
 
 ## Undo Changes and Recover Files
 
-> TODO: enter the git command to do each of these
 
-1.  Display the differences between your *working copy* of `a.py` and the `a.py` in the *local repository* (HEAD revision):
+1. Display the differences between your *working copy* of `a.py` and the `a.py` in the *local repository* (HEAD revision):
    ```
    git diff
    ```
@@ -162,29 +160,26 @@ test/
 
 4. **Undo "git add":** If `main.py` has been added to the staging area (`git add main.py`), remove it from the staging area:
    ```
-   git rm --cached main.py
    git restore --staged main.py
-   
    ```
 
-5. **Recover a file:** Command to replace your working copy of `a.py` with the most recent (HEAD) version in the repository.  This also works if you have deleted your working copy of this file.
-   ```
-   git checkout -- a.py
-   ```
+11. **Recover a file:** Command to replace your working copy of `a.py` with the most recent (HEAD) version in the repository.  This also works if you have deleted your working copy of this file.
+    ```
+    git checkout -- a.py
+    ```
 
-6. **Undo a commit:** Suppose you want to discard some commit(s) and move both HEAD and "master" to an earlier revision (an earlier commit)  Suppose the git commit graph looks like this (`aaaa`, etc, are the commit ids)
-   ```
-   aaaa ---> bbbb ---> cccc ---> dddd [HEAD -> master]
-   ``` 
-   The command to reset HEAD and master to the commit id `bbbb`:
-   ```
-   git reset --hard bbbb
-   ```
+12. **Undo a commit:** Suppose you want to discard some commit(s) and move both HEAD and "master" to an earlier revision (an earlier commit)  Suppose the git commit graph looks like this (`aaaa`, etc, are the commit ids)
+    ```
+    aaaa ---> bbbb ---> cccc ---> dddd [HEAD -> master]
+    ``` 
+    The command to reset HEAD and master to the commit id `bbbb`:
+    ```
+    git reset --hard bbbb
+    ```
 
 
 7. **Checkout old code:** Using the above example, the command to replace your working copy with the files from commit with id `aaaa`:
    ```
-   todo your answer here
    git checkout aaaa
    ```
     Note:
@@ -204,15 +199,15 @@ test/
    ```
    d0436fb (HEAD -> master) deleted c.py
    c21ccb2 moved src directory
+   f59cd30 add git ignore
    9131226 first files
    
-   9131226 ---> c21ccb2 ---> d0436fb [HEAD -> master]
+   9131226 ---> f59cd30 ---> c21ccb2 ---> d0436fb [HEAD -> master]
    
    ```
 
 3. List all the files in the current branch of the repository:
    ```
-   todo your answer
    .gitignore
    README.md
    a.py
@@ -235,7 +230,6 @@ test/
 
 ## Branch and Merge
 
-> TODO write the commands to do each of these
 1. Create a new branch named `dev-foo`:
    ```
    git branch dev-foo
@@ -250,7 +244,6 @@ test/
    ```
      dev-foo
    * master
-   
    ```
 
 7. Switch your working copy to the branch named `dev-foo`:
@@ -259,21 +252,20 @@ test/
    ```
 
 9. **Merge:** To merge the work from `dev-foo` into the master branch, perform these steps:
-   > TODO: write a description of the steps and the git command(s) for each step
    1. step one : switched from branch `dev-foo` to branch `master`
       ```
-      git do something
       git checkout master
       ```
    2. step two : merge branch `dev-foo` into branch `master`
       ```
-      git do something else
       git merge dev-foo
       ```
 
 
 6. Describe under what conditions a merge may fail.
-
+   ```
+   when changed the same part of the same file differently in the two branches that merging
+   ```
 
 
 
@@ -281,6 +273,10 @@ test/
 
 > TODO: Add *at least* 1 git task that (a) that you'd like to remember, or (b) you think is really useful, and the git command(s) to do it.
 
+command to restore file in staging area is very useful when you add wrong file to staging area and don't want to commit it.
+```
+git restore --staged <file>
+```
 
 
 ---
