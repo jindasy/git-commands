@@ -257,7 +257,7 @@ test/
 
 ## Favorites
 
-command to restore file in staging area is very useful when you add wrong file to staging area and don't want to commit it.
+Command to restore file in staging area is very useful when you add wrong file to staging area and don't want to commit it.
 ```
 git restore --staged <file>
 ```
@@ -267,9 +267,9 @@ git restore --staged <file>
 ## Resources
 
 [Pro Git Online Book][ProGit] Chapters 2 & 3 contain the essentials. Downloadable PDF is also available.     
-[Visual Git Reference](https://marklodato.github.io/visual-git-guide) one page with illustrations of git commands.
-[Getting Git right](https://www.atlassian.com/git) Tutorials of git, clear explanation with example.
-[Git Tower](https://www.git-tower.com/learn/git/ebook/) Visual explanation of basics git for beginners
+[Visual Git Reference](https://marklodato.github.io/visual-git-guide) one page with illustrations of git commands.     
+[Getting Git right](https://www.atlassian.com/git) Tutorials of git, clear explanation with example.     
+[Git Tower](https://www.git-tower.com/learn/git/ebook/) Visual explanation of basics git for beginners.     
 
 Try Git:
 
