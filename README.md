@@ -1,6 +1,7 @@
 # Quick Guide to Git
 
-***By Jindaporn***
+***By Jindaporn Sookying***
+
 
 ## Using Git
 
