@@ -1,3 +1,7 @@
+# Quick Guide to Git
+
+***By Jindaporn***
+
 ## Using Git
 
 [Basics](#basics)    
@@ -19,8 +23,8 @@ In this file, directory paths are written with a forward slash as on MacOS, Linu
 1. When using Git locally, what are these?  Define each one in a sentence
    * Staging area - File that wait to be committed.
    * Working copy - All files in working directory of local repository.
-   * master - default branch in repository
-   * HEAD - pointer that tell current branch
+   * master - Default branch in repository.
+   * HEAD - Pointer that tell current branch.
 
 2. When you install git on a new machine (or in a new user account) you should perform these 2 git commands to tell git your name and email.  These values are used in commits that you make:
    ```
